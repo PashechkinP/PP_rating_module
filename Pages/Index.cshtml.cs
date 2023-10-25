@@ -7,6 +7,8 @@ namespace PP_rating_module.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
+        public List<Userochek> userki = new List<Userochek>();
+
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
@@ -16,5 +18,11 @@ namespace PP_rating_module.Pages
         {
 
         }
+
+        async public Task OnPost([FromServices] IFindUser findUserok, string search) // IActionResult - стандартный интерфейс из АСП нужен
+        {
+            userki = await findUserok.FindUser(search);          
+        }
+
     }
 }
