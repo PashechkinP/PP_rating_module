@@ -7,6 +7,9 @@ namespace PP_rating_module.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
+        public List<Userochek> userki = new List<Userochek>();
+        public UserochekHome userokHome = new UserochekHome();
+
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
@@ -16,5 +19,22 @@ namespace PP_rating_module.Pages
         {
 
         }
-    }
+
+        async public Task OnPost([FromServices] IFindUser findUserok, string search, int id) // IActionResult - стандартный интерфейс из АСП нужен в каких-то случаях
+        {
+            userki = await findUserok.FindUser(search);
+            //foreach (var user in userki)
+            //{
+            //    user.Id = id;
+            //    userokHome = await findUserok.UserochekFindHome(id);
+            //}
+
+        }
+
+		protected void showStats(object sender, EventArgs e)
+		{
+
+		}
+
+	}
 }

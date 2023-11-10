@@ -1,7 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+using PP_rating_module;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+var connection = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(connection));
+
+builder.Services.AddTransient<IGetUser,GetUserochek>();
+builder.Services.AddTransient<IFindUser, FindUserochek>();
 
 var app = builder.Build();
 

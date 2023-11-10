@@ -1,0 +1,40 @@
+[{"id":2,"surName":"123","name":"123123","patronymic":"312","phoneNumber":"awfawfawf","eMail":"12312312312r5@faf","gender":"Male","passportSerial":123123,"passportNumber":123123,"birthDate":"2023-10-11T21:00:00Z"},{"id":3,"surName":"23123","name":"123124","patronymic":"2145124","phoneNumber":"awfawf","eMail":"214@afwaf","gender":"Male","passportSerial":4124124,"passportNumber":515125,"birthDate":"2023-09-30T21:00:00Z"},{"id":5,"surName":"31244","name":"5125124","patronymic":"1241243","phoneNumber":"124124","eMail":"12312312312r5@faf","gender":"Male","passportSerial":1241251,"passportNumber":125124123,"birthDate":"2023-10-12T21:00:00Z"},{"id":6,"surName":"test1","name":"test_name","patronymic":"123","phoneNumber":"123124","eMail":"awdawd@adawdad","gender":"Male","passportSerial":213,"passportNumber":123,"birthDate":"2023-09-28T21:00:00Z"},{"id":7,"surName":"123","name":"test_name","patronymic":"123","phoneNumber":"1231shafsf","eMail":"awdawd@adasfagghsga","gender":"Male","passportSerial":0,"passportNumber":0,"birthDate":"2023-10-05T21:00:00Z"}]
+
+
+    @foreach (var item in Model.userki)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Criterion</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr>
+                <th scope="row">1</th>
+                <td>Even id</td>
+                @if (item.Id % 2 == 0)
+                {
+                    <td>1</td>
+                } else
+                {
+                    <td>0</td>
+                }            
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Non-binary</td>
+                @if (item.Gender == "Mail" || item.Gender == "Femail")
+                {
+                    <td>0</td>
+                }
+                else
+                {
+                    <td>1</td>
+                }
+            </tr>
+        </tbody>
+    </table>
+}

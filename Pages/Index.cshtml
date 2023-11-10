@@ -2,26 +2,156 @@
 @model IndexModel
 
 
-<div class="container bg-light">
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom bg-light">
-        <div class="col-md-6 mb-2 mb-md-0">
-            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-                <span class="fs-4" style="color:#6610f2;">Большой братик наблюдает за тобой</span>
-            </a>
-        </div>
+<body class="d-flex flex-column min-vh-100 bg-light">
+	<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom bg-light">
+		<div class="col-md-6 mb-2 mb-md-0">
+			<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+				<svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+				<span class="fs-4" style="color:#6610f2;">Большой братик наблюдает за тобой</span>
+			</a>
+		</div>
 
-        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
-            <li><a href="#" class="nav-link px-2">Features</a></li>
-            <li><a href="#" class="nav-link px-2">Pricing</a></li>
-            <li><a href="#" class="nav-link px-2">FAQs</a></li>
-            <li><a href="#" class="nav-link px-2">About</a></li>
-        </ul>
+		<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" method="post" enctype="multipart/form-data">
+			<div class="row">
+				<div class="col-8"><input name="search" type="text" class="form-control" placeholder="Search..." aria-label="Search"></div>
+				<div class="col-md-2 text-start">
+					<button type="submit" class="btn btn-outline-primary me-2">Search</button>
+				</div>
+			</div>
+		</form>
+	</header>
 
-        <div class="col-md-3 text-end">
-            <button type="button" class="btn btn-outline-primary me-2">Login</button>
-            <button type="button" class="btn btn-primary">Sign-up</button>
-        </div>
-    </header>
-</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6">
+				@foreach (var item in Model.userki)
+				{
+					<div class="card" style="width: 13rem;">
+						<img src="/imgs/spdmn.jpg" class="card-img-top" alt="...">
+						<div class="card-body">
+							<h5 name="userochek_id" class="card-title">Id @item.Id</h5>
+							<p name="userochek_FIO" class="card-text">Name - @item.Name</p>
+							<p name="userochek_Gender" class="card-text">Gender - @item.Gender</p>
+							<a href="#" class="btn btn-primary" OnClick="showStats()" id="statsButton">Show stats</a>
+						</div>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+
+
+	<p> </p>
+
+	<div class="container-fluid">
+
+		<script type="text/javascript">
+			function showStats() {
+				document.getElementById("statsButton").click();
+				var fff = document.getElementById("tbshka");
+				fff.style.display = "block";
+			}
+		</script>
+
+		@foreach (var item in Model.userki)
+		{
+			int evenCounter = 0;
+			int sectorCounter = 0;
+			int genderCounter = 0;
+			int result = 0;
+
+
+			if (Model.userokHome.SectorN % 2 == 0)
+			{
+				sectorCounter = 1;
+			}
+			else
+			{
+				sectorCounter = 0;
+			}
+
+
+			<table class="table" style="display:none" id="tbshka">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Criterion</th>
+						<th scope="col">Status</th>
+					</tr>
+				</thead>
+				<tbody class="table-group-divider">
+					<tr>
+						<th scope="row">1</th>
+						<td>Even id</td>
+						@if (item.Id % 2 == 0)
+						{
+
+							<td>
+								@{
+									evenCounter = 1;
+								}@evenCounter
+							</td>
+						}
+						else
+						{
+							<td>0</td>
+						}
+					</tr>
+					<tr>
+						<th scope="row">2</th>
+						<td>Non-binary</td>
+						@if (item.Gender == "Male" || item.Gender == "Female")
+						{
+							<td>0</td>
+						}
+						else
+						{
+							<td>
+								@{
+									genderCounter = 1;
+								}@genderCounter
+							</td>
+						}
+					</tr>
+					<tr>
+						<th scope="row">3</th>
+						<td>Even Sector#</td>
+						<td>
+							@sectorCounter
+						</td>
+					</tr>
+				<tfoot>
+					<tr>
+						<th></th>
+						<th></th>
+						<th scope="col">
+							Total<br />@{
+									result = evenCounter + genderCounter + sectorCounter;
+								}@result
+						</th>
+					</tr>
+
+				</tfoot>
+				</tbody>
+			</table>
+
+
+		}
+
+	</div>
+
+		
+
+	
+		<footer class="d-flex justify-content-between align-items-center py-3 my-4 border-top" style="position:absolute; bottom:0; width:100%;">
+			<div class="col-md-4 d-flex align-items-center">
+				<span class="fs-2 mb-3 mb-md-0 text-body-secondary">© 2023 Company, Inc</span>
+			</div>
+		</footer>
+	
+
+</body>
+
+
+
+
