@@ -20,21 +20,9 @@ namespace PP_rating_module.Pages
 
         }
 
-        async public Task OnPost([FromServices] IFindUser findUserok, string search, int id) // IActionResult - стандартный интерфейс из АСП нужен в каких-то случаях
+        async public Task OnPost([FromServices] IFindUser findUserok, string search) // IActionResult - стандартный интерфейс из АСП нужен
         {
-            userki = await findUserok.FindUser(search);
-            //foreach (var user in userki)
-            //{
-            //    user.Id = id;
-            //    userokHome = await findUserok.UserochekFindHome(id);
-            //}
-
+            userki = await findUserok.FindUser(search);          
         }
-
-		protected void showStats(object sender, EventArgs e)
-		{
-
-		}
-
-	}
+    }
 }
