@@ -28,7 +28,6 @@ namespace PP_rating_module
     public class FindUserochek : IFindUser
     {
         static HttpClient httpClient = new HttpClient();
-        static HttpClient httpClient1 = new HttpClient();
 
         async public Task<List<Userochek>>  FindUser(string name)
         {
@@ -52,7 +51,7 @@ namespace PP_rating_module
 
         async public Task<UserochekHome> UserochekFindHome(int id)
         {
-            object? dataHomes = await httpClient1.GetFromJsonAsync<UserochekHome>($"http://192.168.90.16:8080/api/homes/address?Id={id}");
+            object? dataHomes = await httpClient.GetFromJsonAsync<UserochekHome>($"http://192.168.90.16:8080/api/homes/address?Id={id}");
             if (dataHomes is UserochekHome uHome)
             {
                 return uHome;
